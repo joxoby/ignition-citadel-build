@@ -12,4 +12,4 @@ before_install:
 - bash install_common_deps.sh
 - bash install_ign_deps.sh
 script:
-- echo 1
+- echo 0
