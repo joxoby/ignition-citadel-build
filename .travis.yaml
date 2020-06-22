@@ -1,0 +1,15 @@
+language: cpp
+sudo: required
+dist: bionic
+compiler:
+- gcc
+os:
+- linux
+ruby: 2.2.0
+before_install:
+- wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_common_deps.sh
+- wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_ign_deps.sh
+- bash install_common_deps.sh
+- bash install_ign_deps.sh
+script:
+- echo 1
