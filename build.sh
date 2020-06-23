@@ -16,5 +16,5 @@ make -j4
 make test
 make package
 cp *.deb $3
-bash deploy.sh $3 $2
+./deploy.sh $3 $2
 
