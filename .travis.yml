@@ -15,10 +15,11 @@ jobs:
     - docker push $DOCKER_USERNAME/ignition-citadel-builder
   - stage: ign-cmake
     script:
-    - docker run --name builder -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash
-    - docker exec builder bash build.sh ignitionrobotics ign-cmake ign-cmake2
+    - docker run --name builder -e BINTRAY_API_KEY=$BINTRAY_API_KEY $DOCKER_USERNAME/ignition-citadel-builder bash
+    - docker exec builder bash build_and_deploy.sh ignitionrobotics ign-cmake ign-cmake2
   - stage: ign-math
     script:
-    - docker run --name builder -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash
-    - docker exec builder bash build.sh ignitionrobotics ign-math ign-math6
+    - docker run --name builder -e BINTRAY_API_KEY=$BINTRAY_API_KEY $DOCKER_USERNAME/ignition-citadel-builder bash
+    - docker exec builder bash download_and_install.sh ign-cmake2
+    - docker exec builder bash build_and_deploy.sh ignitionrobotics ign-math ign-math6
 

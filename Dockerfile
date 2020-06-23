@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ="America/Los_Angeles"
 RUN apt-get update
-RUN apt-get install -y ca-certificates gnupg2 curl wget lsb-release python3.6 python3-pip tzdata sudo
+RUN apt-get install -y ca-certificates gnupg2 curl wget lsb-release python3.6 python3-pip tzdata sudo dpkg
 RUN sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 RUN apt-get update
