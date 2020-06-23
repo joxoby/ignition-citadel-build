@@ -15,4 +15,5 @@ cmake ../
 make -j4
 make test
 make package
+cp *.deb ../../
 
