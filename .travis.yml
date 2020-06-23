@@ -30,13 +30,12 @@ script:
 - cd ignition_workspace/src
 - wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-citadel.yaml
 - vcs import < collection-citadel.yaml
+- cd ..
 
 script:
-- cd ignition_workspace
 - colcon build --merge-install --packages-up-to ignition-rendering3
 
 script:
-- cd ignition_workspace
 - colcon build --merge-install
 
 after_script:
