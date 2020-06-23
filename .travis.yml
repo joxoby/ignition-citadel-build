@@ -14,7 +14,11 @@ jobs:
     - docker tag ignition-citadel-builder $DOCKER_USERNAME/ignition-citadel-builder
     - docker push $DOCKER_USERNAME/ignition-citadel-builder
   - stage: ign-cmake
-    script: bash docker_build.sh ignitionrobotics ign-cmake ign-cmake2
+    script:
+    - docker run --name builder -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash
+    - docker exec builder bash build.sh ignitionrobotics ign-cmake ign-cmake2
   - stage: ign-math
-    script: bash docker_build.sh ignitionrobotics ign-math ign-math6
+    script:
+    - docker run --name builder -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash
+    - docker exec builder bash build.sh ignitionrobotics ign-math ign-math6
 
