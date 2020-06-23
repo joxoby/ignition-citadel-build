@@ -33,7 +33,7 @@ script:
 
 script:
 - cd ~/ignition_workspace
-- colcon build --merge-install --packages-up-to ignition-transport8
+- colcon build --merge-install --packages-up-to ignition-rendering3
 
 script:
 - cd ~/ignition_workspace
