@@ -10,7 +10,7 @@ RUN apt-get update
 RUN apt-get install -y python3-colcon-common-extensions
 RUN pip3 install vcstool
 RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-RUN http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
+RUN wget http://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
 RUN apt-get update
 RUN wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_common_deps.sh
 RUN wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_ign_deps.sh
