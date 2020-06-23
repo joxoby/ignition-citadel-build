@@ -32,11 +32,11 @@ script:
 - vcs import < collection-citadel.yaml
 
 script:
-- cd ~/ignition_workspace
+- cd ignition_workspace
 - colcon build --merge-install --packages-up-to ignition-rendering3
 
 script:
-- cd ~/ignition_workspace
+- cd ignition_workspace
 - colcon build --merge-install
 
 after_script:
