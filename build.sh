@@ -7,7 +7,14 @@
 set -o errexit
 set -o verbose
 
-git clone https://github.com/$1/$2 -b $3
+ORG=$1
+REPO=$2
+BRANCH=$3
+
+DEB_FILENAME=$BRANCH
+DEB_PACKAGE_NAME=$REPO
+
+git clone https://github.com/$ORG/REPO -b $BRANCH
 cd $2 
 mkdir build
 cd build
@@ -15,6 +22,6 @@ cmake ../
 make -j4
 make test
 make package
-cp *.deb $3
-./deploy.sh $3 $2
+cp *.deb $DEB_FILENAME
+bash deploy.sh $DEB_FILENAME $DEB_PACKAGE_NAME
 

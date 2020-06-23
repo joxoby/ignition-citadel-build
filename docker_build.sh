@@ -7,4 +7,8 @@
 set -o errexit
 set -o verbose
 
-docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash build.sh $1 $2 $3
+ORG=$1
+REPO=$2
+BRANCH=$3
+
+docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder /bin/bash -c "build.sh $ORG $REPO $BRANCH"

@@ -18,4 +18,3 @@ RUN bash install_common_deps.sh
 RUN bash install_ign_deps.sh
 COPY build.sh build.sh
 COPY deploy.sh deploy.sh
-RUN chmod +x deploy.sh
