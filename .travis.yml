@@ -13,6 +13,7 @@ jobs:
     - docker images
     - docker tag ignition-citadel-builder $DOCKER_USERNAME/ignition-citadel-builder
     - docker push $DOCKER_USERNAME/ignition-citadel-builder
-  - stage: test
-    script: docker run --rm $DOCKER_USERNAME/ignition-citadel-builder echo hola
+  - stage: ign-cmake
+    script:
+    - docker run --rm $DOCKER_USERNAME/ignition-citadel-builder bash build.sh ignitionrobotics ign-cmake ign-cmake2
 
