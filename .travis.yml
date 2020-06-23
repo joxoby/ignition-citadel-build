@@ -15,5 +15,5 @@ jobs:
     - docker push $DOCKER_USERNAME/ignition-citadel-builder
   - stage: ign-cmake
     script:
-    - docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash build_ign_cmake.sh
+    - docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash build.sh ignitionrobotics ign-cmake ign-cmake2
 

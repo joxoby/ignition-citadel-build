@@ -17,4 +17,4 @@ RUN wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/do
 RUN bash install_common_deps.sh
 RUN bash install_ign_deps.sh
 COPY build.sh build.sh
-COPY build_ign_cmake.sh build_ign_cmake.sh
+COPY deploy.sh deploy.sh
