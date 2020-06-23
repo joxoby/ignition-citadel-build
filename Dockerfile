@@ -1,10 +1,10 @@
 FROM ubuntu:18.04
 
 RUN apt-get update
-RUN apt-get install -y ca-certificates gnupg2 curl wget
+RUN apt-get install -y ca-certificates gnupg2 curl wget lsb-release
 RUN sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
 RUN curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
-RUN apt update
+RUN apt-update
 RUN apt install python3-colcon-common-extensions
 RUN pip install vcstool
 RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
