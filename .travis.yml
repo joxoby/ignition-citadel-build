@@ -1,39 +1,30 @@
-language: cpp
-cache: ccache
-sudo: required
 dist: bionic
-services:
-- xvfb
-env:
-- MAKEFLAGS="-j 2"
-compiler:
-- gcc
 os:
 - linux
 
-install:
-- sudo sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
-- curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-- sudo apt update
-- sudo apt install python3-colcon-common-extensions
-- pip install vcstool
-- sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
-- wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
-- sudo apt-get update
-- wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_common_deps.sh
-- wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_ign_deps.sh
-- bash install_common_deps.sh
-- bash install_ign_deps.sh
+jobs:
+  include:
+    - stage: build docker image
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker build -t ignition-citadel-builder .
+      - docker images
+      - docker tag ignition-citadel-builder $DOCKER_USERNAME/ignition-citadel-builder
+      - docker push $DOCKER_USERNAME/ignition-citadel-builder
+    - stage: test
+      script: docker run --rm $DOCKER_USERNAME/ignition-citadel-builder echo hola
 
-script:
-- mkdir -p ignition_workspace/src
-- cd ignition_workspace/src
-- wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-citadel.yaml
-- vcs import < collection-citadel.yaml
-- cd ..
-- colcon build --merge-install
+# script:
+# - mkdir -p ignition_workspace/src
+# - cd ignition_workspace/src
+# - wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-citadel.yaml
+# - vcs import < collection-citadel.yaml
+# - cd ..
+# - colcon build --merge-install
 
-after_script:
-- export IGN_IP=127.0.01
-- colcon test --merge-install
-- colcon test-result --verbose
+# after_script:
+# - export IGN_IP=127.0.01
+# - colcon test --merge-install
+# - colcon test-result --verbose
+
+
