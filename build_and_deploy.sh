@@ -11,8 +11,7 @@ ORG=$1
 REPO=$2
 BRANCH=$3
 
-DEB_FILENAME=$BRANCH
-DEB_PACKAGE_NAME=$REPO
+DEB_PACKAGE=$BRANCH
 
 # Build and test
 git clone https://github.com/$ORG/$REPO -b $BRANCH
@@ -23,10 +22,10 @@ cmake ../
 make -j4
 make test
 make package
-cp *.deb $DEB_FILENAME
+
+FILE="$DEB_PACKAGE.deb"
+cp *.deb $FILE
 
 # Deploy
-FILE=$DEB_FILENAME
-PACKAGE=$DEB_PACKAGE_NAME
-curl -T $FILE -u joxoby:$BINTRAY_API_KEY https://api.bintray.com/content/joxoby/ignition-citadel/$PACKAGE/dev/$PACKAGE;deb_distribution=bionic;deb_component=main;deb_architecture=amd64
+curl -T $FILE -u joxoby:$BINTRAY_API_KEY https://api.bintray.com/content/joxoby/ignition-citadel/$DEB_PACKAGE/dev/$DEB_PACKAGE;deb_distribution=bionic;deb_component=main;deb_architecture=amd64
 
