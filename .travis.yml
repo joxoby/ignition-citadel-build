@@ -1,12 +1,16 @@
 language: cpp
+cache: ccache
 sudo: required
 dist: bionic
 services:
 - xvfb
+env:
+- MAKEFLAGS="-j 2"
 compiler:
 - gcc
 os:
 - linux
+
 install:
 - sudo sh -c 'echo "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main `lsb_release -cs` main" > /etc/apt/sources.list.d/ros2-latest.list'
 - curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
@@ -20,14 +24,21 @@ install:
 - wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_ign_deps.sh
 - bash install_common_deps.sh
 - bash install_ign_deps.sh
+
 script:
-- export MAKEFLAGS="-j $(grep -c ^processor /proc/cpuinfo)"
 - mkdir -p ignition_workspace/src
 - cd ignition_workspace/src
 - wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-citadel.yaml
 - vcs import < collection-citadel.yaml
-- cd ..
+
+script:
+- cd ~/ignition_workspace
+- colcon build --merge-install --packages-up-to ignition-transport8
+
+script:
+- cd ~/ignition_workspace
 - colcon build --merge-install
+
 after_script:
 - export IGN_IP=127.0.01
 - xvfb-run colcon test --merge-install
