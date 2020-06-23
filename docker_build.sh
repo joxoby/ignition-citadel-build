@@ -7,14 +7,4 @@
 set -o errexit
 set -o verbose
 
-git clone https://github.com/$1/$2 -b $3
-cd $2 
-mkdir build
-cd build
-cmake ../
-make -j4
-make test
-make package
-cp *.deb $3
-bash deploy.sh $3 $2
-
+docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash build.sh $1 $2 $3
