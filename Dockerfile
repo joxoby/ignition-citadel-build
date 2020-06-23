@@ -16,5 +16,5 @@ RUN wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/do
 RUN wget https://raw.githubusercontent.com/ignitionrobotics/ign-gazebo/master/docker/scripts/install_ign_deps.sh
 RUN bash install_common_deps.sh
 RUN bash install_ign_deps.sh
-COPY build.sh /usr/local/bin/
-COPY deploy.sh /usr/local/bin/
+COPY build_and_deploy.sh /usr/local/bin/
+COPY download_and_install.sh /usr/local/bin/
