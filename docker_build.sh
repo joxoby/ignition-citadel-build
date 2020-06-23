@@ -11,4 +11,4 @@ ORG=$1
 REPO=$2
 BRANCH=$3
 
-docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder /bin/bash -c "build.sh $ORG $REPO $BRANCH"
+docker run -e BINTRAY_API_KEY=$BINTRAY_API_KEY --rm $DOCKER_USERNAME/ignition-citadel-builder bash build.sh $ORG $REPO $BRANCH
