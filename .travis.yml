@@ -31,12 +31,7 @@ script:
 - wget https://raw.githubusercontent.com/ignition-tooling/gazebodistro/master/collection-citadel.yaml
 - vcs import < collection-citadel.yaml
 - cd ..
-
-script:
 - colcon build --merge-install --packages-up-to ignition-rendering3
-
-script:
-- colcon build --merge-install
 
 after_script:
 - export IGN_IP=127.0.01
