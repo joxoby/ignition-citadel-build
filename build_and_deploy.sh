@@ -15,7 +15,7 @@ DEB_FILENAME=$BRANCH
 DEB_PACKAGE_NAME=$REPO
 
 # Build and test
-git clone https://github.com/$ORG/REPO -b $BRANCH
+git clone https://github.com/$ORG/$REPO -b $BRANCH
 cd $2 
 mkdir build
 cd build
